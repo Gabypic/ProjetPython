@@ -21,7 +21,7 @@ def menu():
 def menu_selector(choice):
     if choice == "1":
         print("\033[92mCreating Game... \033[0m")
-        clear.clear_terminal(1)
+        clear.clear_terminal(2)
         cg.create()
 
     elif choice == "2":
@@ -33,10 +33,15 @@ def menu_selector(choice):
         clear.clear_terminal(1)
 
     elif choice == "4":
-        print("\033[91Quitting Game... \033[0m")
         print("\033[91mReally want to quit ? \033[0m")
-        sys.exit()
-
+        validation = input('press enter to quit, insert "no" to return to menu : ')
+        if validation == "no":
+            print("\033[92mReturn to menu!\033[0m")
+            clear.clear_terminal(1)
+            menu()
+        else:
+            print("\033[91mQuitting Game... \033[0m")
+            sys.exit()
     else:
         print("\033[91mInvalid Choice \n"
               "Reloading Menu...\033[0m")

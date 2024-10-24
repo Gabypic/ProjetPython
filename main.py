@@ -1,4 +1,6 @@
 import Game.Menu as mn
+import Game.beginning as bg
+import map.map
 ## Texte en rouge
 #print("\033[91mCeci est un texte rouge\033[0m")
 ## Texte en vert
@@ -10,4 +12,6 @@ import Game.Menu as mn
 ## Texte en bleu
 #print("\033[94mCeci est un texte bleu\033[0m")
 
+bg.begin()
+map.map.printer()
 mn.menu()
