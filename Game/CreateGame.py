@@ -1,5 +1,8 @@
 import time
+
+import clear
 from Entity import Player
+from Game import Beginning
 
 
 def create():
@@ -18,6 +21,8 @@ def create():
           f"attack : {player.attack}\n"
           f"speed: {player.speed}\n")
     input("insert anything to start :")
+    clear.clear_terminal(1)
+    Beginning.begin(player)
 
 
 def difficulty_selector():
