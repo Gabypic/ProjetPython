@@ -1,4 +1,5 @@
 from random import *
+
 class Player:
     def __init__(self, name, score, level, base_xp, experience, health, defense, attack, speed, inventory, place):
         self.name = name

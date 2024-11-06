@@ -1,6 +1,6 @@
 from Entity import Monsters
 import clear
-
+from Entity.Player import Player
 
 turn = 1
 
@@ -30,13 +30,13 @@ def fight_choice(is_escapable, player, mob):
         turn += 1
         input("\n\033[93mPress enter to continue\033[0m")
         clear.clear_terminal(0)
-        fight(player, mob)
+        return
     if choice == "2":
         print(f"Open inventory\n")
         turn += 1
         input("\n\033[93mPress enter to continue\033[0m")
         clear.clear_terminal(0)
-        fight(player, mob)
+        return
     if choice == "3":
         print(f"\033[93mBy fleeing, the monster present on the square,"
               f" as well as the potential items, will disappear. \n"
@@ -53,3 +53,9 @@ def fight_choice(is_escapable, player, mob):
         print("That's not a valid choice")
         input("\n\033[93mPress enter to continue\033[0m\n")
         return fight_choice(is_escapable, player, mob)
+
+def attack(player, mob):
+    print("you are going to attack\n"
+          "which weapon do you want to use ?")
+
+    weapons = Player.inv
