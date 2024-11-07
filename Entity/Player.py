@@ -1,7 +1,9 @@
 from random import *
+from Entity import Weapons, Monsters
 
 class Player:
-    def __init__(self, name, score, level, base_xp, experience, health, defense, attack, speed, inventory, place):
+    def __init__(self, name, score, level, base_xp, experience, health, defense, attack,
+                 speed, inventory, place, equipped):
         self.name = name
         self.score = score
         self.level = level
@@ -13,6 +15,7 @@ class Player:
         self.speed = speed
         self.inventory = inventory
         self.place = place
+        self.equipped = equipped
 
     def __str__(self):
         return self.name
@@ -22,6 +25,7 @@ class Player:
         self.defense = randint(10, 20)
         self.attack = randint(12, 22)
         self.speed = randint(10, 20)
+        self.equipped = Weapons.Dagger()
 
     def level_up(self):
         self.level += 1
@@ -33,3 +37,9 @@ class Player:
         else:
             self.attack += randint(2, 5)
             self.defense += randint(1, 3)
+
+    def attack_monster(self, mob):
+        if self.equipped is not None:
+            mob.take_damage(self.attack + self.equipped.damage)
+        else:
+            mob.take_damage(self.attack)

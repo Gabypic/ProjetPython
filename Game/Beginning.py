@@ -16,8 +16,9 @@ def begin(player):
           "Before you can react, it leaps at you with surprising speed.\n"
           "Instinctively, you draw your dagger and prepare to parry its strike.\n")
 
-    baby_goblin = Monsters.Monster("Baby Goblin")
+    baby_goblin = Monsters.Monsters("Baby Goblin")
 
     input("\n\033[93mPress enter to start the fight...\033[0m")
     clear.clear_terminal(2)
     Fight.fight(player, baby_goblin)
+
