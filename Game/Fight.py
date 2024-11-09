@@ -1,11 +1,13 @@
 from Entity import Monsters, Weapons, Player
 import clear
 from Entity.Player import Player
+from Game.MusicControl import music_controller
 
 
 def fight(player, mob):
     turn = 1
     print(f"A {mob.name} attacks you, the fight begins\n")
+    music_controller("./Musiques/battle.mp3", False)
     while player.health > 0 and mob.health > 0:
         print(f"You are fighting against {mob.name}, hp : {mob.health}/{mob.max_health}, turn : {turn}\n"
               f"hp : {player.health}/{player.max_health}\n")
@@ -18,6 +20,7 @@ def fight(player, mob):
         else:
             fight_choice(True, player, mob)
         turn += 1
+    MusicControl.music_controller("./Musiques/battle.mp3", False)
     print("\033[92mCongratulations! You won the fight\033[0m")
     return
 

@@ -12,5 +12,7 @@ import clear
 #print("\033[94mCeci est un texte bleu\033[0m")
 
 #bg.begin()
+
 clear.clear_terminal(1)
 mn.menu()
+
