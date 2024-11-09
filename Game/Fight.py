@@ -7,7 +7,8 @@ def fight(player, mob):
     turn = 1
     print(f"A {mob.name} attacks you, the fight begins\n")
     while player.health > 0 and mob.health > 0:
-        print(f"You are fighting against {mob.name}, hp : {mob.health}/{mob.max_health}, turn : {turn}\n\n")
+        print(f"You are fighting against {mob.name}, hp : {mob.health}/{mob.max_health}, turn : {turn}\n"
+              f"hp : {player.health}/{player.max_health}\n")
         print(f"You have three possibilities:\n"
               f"1. Attack\n"
               f"2. Open inventory\n"
@@ -24,8 +25,13 @@ def fight(player, mob):
 def fight_choice(is_escapable, player: Player, mob: Monsters):
     choice = input("What do you want to do? \n")
     if choice == "1":
-        print(f"Attack\n")
-        player.attack_monster(mob)
+        print(f"You attack the monster")
+        player_damage = player.attack_monster(mob)
+        print(f"You have inflected {player_damage}hp to the monster\n")
+        if mob.health > 0:
+            print('Monster attack you')
+            mob_damage = mob.attack_player(player)
+            print(f"Monster inflected you {mob_damage}hp\n")
         input("\n\033[93mPress enter to continue\033[0m")
         clear.clear_terminal(0)
         return

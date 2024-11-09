@@ -1,4 +1,5 @@
 import Game.Menu as mn
+import clear
 ## Texte en rouge
 #print("\033[91mCeci est un texte rouge\033[0m")
 ## Texte en vert
@@ -11,4 +12,5 @@ import Game.Menu as mn
 #print("\033[94mCeci est un texte bleu\033[0m")
 
 #bg.begin()
+clear.clear_terminal(1)
 mn.menu()
