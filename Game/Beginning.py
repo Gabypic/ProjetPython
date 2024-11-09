@@ -1,6 +1,6 @@
 import clear
 from Entity import Monsters
-from Game import Fight
+from Game import Fight, Controls
 
 
 def begin(player):
@@ -21,4 +21,4 @@ def begin(player):
     input("\n\033[93mPress enter to start the fight...\033[0m")
     clear.clear_terminal(2)
     Fight.fight(player, baby_goblin)
-
+    Controls.Controls_Menu(player)

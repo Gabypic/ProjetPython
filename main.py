@@ -1,5 +1,6 @@
 import Game.Menu as mn
 import clear
+import Game.Controls as ctrl
 ## Texte en rouge
 #print("\033[91mCeci est un texte rouge\033[0m")
 ## Texte en vert
@@ -15,4 +16,3 @@ import clear
 
 clear.clear_terminal(1)
 mn.menu()
-

@@ -56,5 +56,4 @@ def fight_choice(is_escapable, player: Player, mob: Monsters):
         fight(player, mob)
     else:
         print("That's not a valid choice")
-        input("\n\033[93mPress enter to continue\033[0m\n")
         return fight_choice(is_escapable, player, mob)

@@ -6,14 +6,18 @@ class Monsters(GlobalEntity.Entity):
     def __init__(self, name):
 
         if name == "Baby Goblin":
-            super().__init__(name, 1, 200, 25, 5,
-                             8, 12, [], None, Weapons.Dagger())
+            super().__init__(name, 1, 200, 30, 5,
+                             5, 12, [], None, Weapons.Dagger())
         if name == "Punching Ball":
             super().__init__(name, 1, 0, 9999, 0,
                              0, 0, [], None, None)
+        if name == "Mimmic":
+            super().__init__(name, 1, 400, 50, 10,
+                             11, 14, [], None, None)
         if name == "Nergigante":
             super().__init__(name, 25, 5000, 500, 42,
                              69, 100, [],  [9, 9], None)
+
     def take_damage(self, damage):
         self.health -= damage
 

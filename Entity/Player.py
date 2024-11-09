@@ -2,10 +2,11 @@ from random import *
 from Entity import Weapons, Monsters
 
 class Player:
-    def __init__(self, name, score, level, base_xp, experience, health, defense, attack,
+    def __init__(self, name, score, difficulty, level, base_xp, experience, health, defense, attack,
                  speed, inventory, place, equipped):
         self.name = name
         self.score = score
+        self.difficulty = difficulty
         self.level = level
         self.base_xp = base_xp
         self.experience = experience
@@ -53,12 +54,23 @@ class Player:
                 return 0
             if roll == 10:
                 print("\033[92mBoom Critical Hit !\033[0m")
-                mob.take_damage((self.attack + self.equipped.damage) * 2)
-                return (self.attack + self.equipped.damage) * 2
+                damages = randint(self.attack - 1, self.attack + 4)
+                mob.take_damage((damages + self.equipped.damage) * 1.5)
+                return (damages + self.equipped.damage) * 1.5
             else :
-                damage = randint(self.attack - 3, self.attack + 3)
-                mob.take_damage(damage + self.equipped.damage)
-                return damage + self.equipped.damage
+                damages = randint(self.attack - 3, self.attack + 3)
+                mob.take_damage((damages + self.equipped.damage) - mob.defense)
+                return damages + self.equipped.damage - mob.defense
         else:
             mob.take_damage(self.attack)
             return self.attack
+
+    def move(self, direction):
+        if direction == "up":
+            self.place[1] -= 1
+        if direction == "down":
+            self.place[1] += 1
+        if direction == "left":
+            self.place[0] -= 1
+        if direction == "right":
+            self.place[0] += 1

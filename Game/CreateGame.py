@@ -11,7 +11,7 @@ def create():
     difficulty, base_xp = difficulty_selector()
     print(difficulty)
     print("\033[93mYour base stats will be randomly generated.\033[0m")
-    player = Player.Player(name, 0, 1, base_xp, 0,
+    player = Player.Player(name, 0, difficulty, 1, base_xp, 0,
                            0, 0, 0, 0, [], [4, 4], None)
     player.set_base_stats()
     print("\033[94mYour base stats :\033[0m\n"
