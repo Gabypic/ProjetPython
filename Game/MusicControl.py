@@ -1,5 +1,6 @@
 import pygame
 
+
 def music_controller(path, state, volume=0.4):
     if not state:
         pygame.mixer.init()

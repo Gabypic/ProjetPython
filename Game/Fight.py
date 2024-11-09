@@ -1,3 +1,4 @@
+import random
 from Entity import Monsters, Weapons, Player
 import clear
 from Entity.Player import Player
@@ -6,8 +7,9 @@ from Game.MusicControl import music_controller
 
 def fight(player, mob):
     turn = 1
+    song = random_song()
     print(f"A {mob.name} attacks you, the fight begins\n")
-    music_controller("./Musiques/battle.mp3", False)
+    music_controller(song, False)
     while player.health > 0 and mob.health > 0:
         print(f"You are fighting against {mob.name}, hp : {mob.health}/{mob.max_health}, turn : {turn}\n"
               f"hp : {player.health}/{player.max_health}\n")
@@ -20,7 +22,7 @@ def fight(player, mob):
         else:
             fight_choice(True, player, mob)
         turn += 1
-    music_controller("./Musiques/battle.mp3", False)
+    music_controller(song, True)
     print("\033[92mCongratulations! You won the fight\033[0m")
     return
 
@@ -57,3 +59,10 @@ def fight_choice(is_escapable, player: Player, mob: Monsters):
     else:
         print("That's not a valid choice")
         return fight_choice(is_escapable, player, mob)
+
+
+def random_song():
+    songs = ["./Musiques/battle.mp3", "./Musiques/ChampionRed.mp3", "./Musiques/Cynthia.mp3", "./Musiques/Raikou.mp3",
+             "./Musiques/ReshiramZekrom.pm3", "./Musiques/Suicune.mp3"]
+    selected_song = random.choice(songs)
+    return selected_song
