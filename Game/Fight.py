@@ -15,12 +15,12 @@ def fight(player, mob):
               f"1. Attack\n"
               f"2. Open inventory\n"
               f"3. Flee\n\n")
-        if mob.name == "Baby Goblin":
+        if mob.name == "Baby Goblin" or mob.name == "Nergigante":
             fight_choice(False, player, mob)
         else:
             fight_choice(True, player, mob)
         turn += 1
-    MusicControl.music_controller("./Musiques/battle.mp3", False)
+    music_controller("./Musiques/battle.mp3", False)
     print("\033[92mCongratulations! You won the fight\033[0m")
     return
 
