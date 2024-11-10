@@ -7,7 +7,10 @@ from Musiques.MusicControl import music_controller
 
 def fight(player: Player, mob: Monsters.Monsters):
     turn = 1
-    song = random_battle_song()
+    if mob.name == "Nergigante":
+        song = "./Musiques/Battle/Nergigante's Theme.mp3"
+    else:
+        song = random_battle_song()
     print(f"A {mob.name} attacks you, the fight begins\n")
     music_controller(song, False)
     while player.health > 0 and mob.health > 0:

@@ -33,11 +33,11 @@ class Player:
     def level_up(self):
         self.level += 1
         self.experience = 0
-        self.base_xp = self.base_xp * 1.1
-        self.health += randint(3, 7)
-        self.max_health = self.health
-        self.defense += randint(2, 5)
-        self.attack += randint(2, 5)
+        self.base_xp = self.base_xp * 1.3
+        self.max_health += randint(3, 7)
+        self.health = self.max_health
+        self.defense += randint(0, 4)
+        self.attack += randint(0, 3)
 
     def take_damage(self, damage):
         self.health -= damage

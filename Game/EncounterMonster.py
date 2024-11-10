@@ -12,22 +12,21 @@ def encounter_monster(player):
     }
 
     if player.place == [9, 9] and player.level > 20:
-        Fight.fight(player, "Nergigante")
+        Fight.fight(player, Monsters.Monsters("Nergigante"))
 
     encounter_chance = random.randint(1, 10)
     possible_monsters = ""
     if encounter_chance > 3:
-        if player.level < 10:
-            print("tayo")
+        if player.level < 7:
             possible_monsters = monsters_by_level["low"]
-        elif 10 <= player.level < 20:
+        elif 7 <= player.level < 15:
             possible_monsters = monsters_by_level["medium"]
         else:
             possible_monsters = monsters_by_level["high"]
 
-    try:
-        chosen_monster = random.choice(possible_monsters)
-    except:
-        chosen_monster = random.choice(monsters_by_level["boss"])
+        try:
+            chosen_monster = random.choice(possible_monsters)
+        except:
+            chosen_monster = random.choice(monsters_by_level["boss"])
 
-    Fight.fight(player, Monsters.Monsters(chosen_monster))
+        Fight.fight(player, Monsters.Monsters(chosen_monster))

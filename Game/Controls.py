@@ -3,7 +3,7 @@ from Game import EncounterMonster
 
 
 def Controls_Menu(player):
-    song = MusicControl.music_controller(MusicControl.random_ambiant_song(), False)
+    MusicControl.music_controller(MusicControl.random_ambiant_song(), False)
     while True:
         print("\n\033[92mControls\033[0m")
         print("---------------------------------------------------")
@@ -36,6 +36,11 @@ def Controls_Selector(selection, player):
         print("save game")
     if selection == "exit":
         close_game()
+    if selection == "cheat":
+        level_choice = input("wich level do you want?\n")
+        player.level = int(level_choice)
+        player.place = [9, 9]
+        player.attack = 2000
     return
 
 

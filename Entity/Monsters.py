@@ -9,8 +9,8 @@ class Monsters(GlobalEntity.Entity):
             super().__init__(name, 1, 200, 30, 5,
                              5, 12, {}, None, Weapons.Dagger())
         if name == "Slime":
-            super().__init__(name, 2, 400, 45, 8,
-                             20, 14, {}, None, None)
+            super().__init__(name, 2, 200, 45, 8,
+                             16, 14, {}, None, None)
         if name == "Goblin":
             super().__init__(name, 5, 600, 60, 23,
                              25, 15, {}, None, Weapons.Sword())
@@ -18,8 +18,8 @@ class Monsters(GlobalEntity.Entity):
             super().__init__(name, 15, 900, 90, 27,
                              32, 20, {}, None, Weapons.Axe())
         if name == "Little Skeleton":
-            super().__init__(name, 2, 450, 50, 18,
-                             20, 14, {}, None, Weapons.Rapier())
+            super().__init__(name, 2, 300, 50, 10,
+                             18, 14, {}, None, Weapons.Rapier())
         if name == "Skeleton":
             super().__init__(name, 6, 650, 65, 12,
                              22, 20, {}, None, Weapons.Sword())
@@ -66,5 +66,9 @@ class Monsters(GlobalEntity.Entity):
                     player.take_damage(0)
                     return 0
         else:
-            player.take_damage(self.attack - player.defense)
-            return self.attack - player.defense
+            if self.attack - player.defense > 0:
+                player.take_damage(self.attack - player.defense)
+                return self.attack - player.defense
+            else:
+                player.take_damage(0)
+                return 0
