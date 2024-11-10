@@ -1,4 +1,9 @@
+from Musiques import MusicControl
+from Game import EncounterMonster
+
+
 def Controls_Menu(player):
+    song = MusicControl.music_controller(MusicControl.random_ambiant_song(), False)
     while True:
         print("\n\033[92mControls\033[0m")
         print("---------------------------------------------------")
@@ -10,13 +15,14 @@ def Controls_Menu(player):
         print("\033[93mSave\033[0m : Save game")
         print("\033[91mExit\033[0m : Quit game")
         print("---------------------------------------------------")
-        choice = input("\nWhat do you want to do?\n")
+        choice = input("\nWhat do you want to do?\n").lower()
         Controls_Selector(choice, player)
 
 
 def Controls_Selector(selection, player):
-    if selection == "up" or selection == "Down" or selection == "Left" or selection == "Right":
+    if selection == "up" or selection == "down" or selection == "left" or selection == "right":
         player.move(selection)
+        EncounterMonster.encounter_monster(player)
         print(player.place)
     if selection == "i":
         print("inventory")
@@ -26,9 +32,9 @@ def Controls_Selector(selection, player):
         stats_printer(player)
     if selection == "r":
         print("rules")
-    if selection == "Save":
+    if selection == "save":
         print("save game")
-    if selection == "Exit":
+    if selection == "exit":
         close_game()
     return
 
@@ -50,7 +56,7 @@ def stats_printer(player):
 
 def close_game():
     print("\033[91mDid you save the game ?\033[0m")
-    choice = input("\nYes/No\n")
+    choice = input("\nYes/No\n").lower()
     if choice == "no":
         print("Quitting whithout saving ?")
         choice = input("\n\033[93mYes/No\033[0m")

@@ -1,9 +1,11 @@
 import clear
 from Entity import Monsters
 from Game import Fight, Controls
+from Musiques import MusicControl
 
 
 def begin(player):
+    MusicControl.music_controller(MusicControl.random_ambiant_song(), False)
     print("You awaken in the midst of a forest, your mind a blank slate.\n"
           "As you gather your thoughts, you realize a dagger rests in its sheath at your belt\n"
           "and a leather satchel hangs empty by your side.\n"

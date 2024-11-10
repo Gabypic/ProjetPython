@@ -1,13 +1,13 @@
 import random
-from Entity import Monsters, Weapons, Player
+from Entity import Monsters
 import clear
 from Entity.Player import Player
-from Game.MusicControl import music_controller
+from Musiques.MusicControl import music_controller
 
 
-def fight(player, mob):
+def fight(player: Player, mob: Monsters.Monsters):
     turn = 1
-    song = random_song()
+    song = random_battle_song()
     print(f"A {mob.name} attacks you, the fight begins\n")
     music_controller(song, False)
     while player.health > 0 and mob.health > 0:
@@ -23,7 +23,19 @@ def fight(player, mob):
             fight_choice(True, player, mob)
         turn += 1
     music_controller(song, True)
+    if player.health <= 0:
+        print(f"\033[91mGAME OVER !\nYou lose against {mob.name}\nScore : {player.score}\033[0m")
+        exit("\033[91mGame Over\033[0m")
     print("\033[92mCongratulations! You won the fight\033[0m")
+    print(f"You won {mob.experience_give}xp")
+
+    player.experience += mob.experience_give
+    if player.experience < player.base_xp:
+        print(f"{player.experience}/{player.base_xp}xp")
+    else:
+        player.level_up()
+        print(f"well done you have leveled up. level:{player.level}")
+
     return
 
 
@@ -61,8 +73,8 @@ def fight_choice(is_escapable, player: Player, mob: Monsters):
         return fight_choice(is_escapable, player, mob)
 
 
-def random_song():
-    songs = ["./Musiques/battle.mp3", "./Musiques/ChampionRed.mp3", "./Musiques/Cynthia.mp3", "./Musiques/Raikou.mp3",
-             "./Musiques/ReshiramZekrom.pm3", "./Musiques/Suicune.mp3"]
+def random_battle_song():
+    songs = ["./Musiques/Battle/battle.mp3", "./Musiques/Battle/ChampionRed.mp3", "./Musiques/Battle/Cynthia.mp3",
+             "./Musiques/Battle/Raikou.mp3", "./Musiques/Battle/ReshiramZekrom.mp3", "./Musiques/Battle/Suicune.mp3"]
     selected_song = random.choice(songs)
     return selected_song

@@ -1,5 +1,6 @@
 import Game.Menu as mn
 import clear
+from Musiques import MusicControl
 import Game.Controls as ctrl
 ## Texte en rouge
 #print("\033[91mCeci est un texte rouge\033[0m")

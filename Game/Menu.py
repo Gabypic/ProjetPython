@@ -3,9 +3,11 @@ import sys
 import time
 import clear
 from Game import CreateGame as cg
+from Musiques import MusicControl
 
 
 def menu():
+    MusicControl.music_controller("./Musiques/Ambiant/SkywardSwordMainMenu.mp3", False)
     print("\033[92mWELCOME ON PYTHON RPG PROJECT !\033[0m\n")
     print("--------------------------------")
     print("\033[94mMain Menu : \033[0m")
@@ -27,6 +29,7 @@ def menu_selector(choice):
     elif choice == "2":
         print("\033[92mLoading Game... \033[0m")
         clear.clear_terminal(1)
+        MusicControl.music_controller("./Musique/Ambiant/SkywardSwordMainMenu.mp3", True)
 
     elif choice == "3":
         print("\033[92mAbout... \033[0m")
