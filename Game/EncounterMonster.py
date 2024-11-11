@@ -30,3 +30,4 @@ def encounter_monster(player):
             chosen_monster = random.choice(monsters_by_level["boss"])
 
         Fight.fight(player, Monsters.Monsters(chosen_monster))
+        return True

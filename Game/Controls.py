@@ -3,8 +3,10 @@ from Game import EncounterMonster
 
 
 def Controls_Menu(player):
-    MusicControl.music_controller(MusicControl.random_ambiant_song(), False)
+    reload = True
     while True:
+        if reload:
+            MusicControl.music_controller(MusicControl.random_ambiant_song(), False)
         print("\n\033[92mControls\033[0m")
         print("---------------------------------------------------")
         print("\033[94mUp/Down/Left/Right\033[0m : go in the direction you want")
@@ -16,16 +18,19 @@ def Controls_Menu(player):
         print("\033[91mExit\033[0m : Quit game")
         print("---------------------------------------------------")
         choice = input("\nWhat do you want to do?\n").lower()
-        Controls_Selector(choice, player)
+        reload = Controls_Selector(choice, player)
 
 
 def Controls_Selector(selection, player):
+    reload = False
     if selection == "up" or selection == "down" or selection == "left" or selection == "right":
         player.move(selection)
-        EncounterMonster.encounter_monster(player)
+        ecounter = EncounterMonster.encounter_monster(player)
         print(player.place)
+        if ecounter:
+            reload = True
     if selection == "i":
-        print("inventory")
+        show_inventory(player)
     if selection == "e":
         print(player.equipped)
     if selection == "s":
@@ -41,7 +46,7 @@ def Controls_Selector(selection, player):
         player.level = int(level_choice)
         player.place = [9, 9]
         player.attack = 2000
-    return
+    return reload
 
 
 def stats_printer(player):
@@ -75,3 +80,9 @@ def close_game():
     if choice == "yes":
         print("\033[93mQuitting Game\033[0m")
         exit("Game closed")
+
+
+def show_inventory(player):
+    player.show_weapons_inventory()
+    input("\n\033[93mPress enter to continue\033[0m")
+    return

@@ -3,6 +3,7 @@ from Entity import Monsters
 import clear
 from Entity.Player import Player
 from Musiques.MusicControl import music_controller
+from Game import Loot
 
 
 def fight(player: Player, mob: Monsters.Monsters):
@@ -31,6 +32,12 @@ def fight(player: Player, mob: Monsters.Monsters):
         exit("\033[91mGame Over\033[0m")
     print("\033[92mCongratulations! You won the fight\033[0m")
     print(f"You won {mob.experience_give}xp")
+
+    Loot.Mob_Loot(player, mob)
+
+    chest = random.randrange(1, 10)
+    if chest >= 5:
+        Loot.Chest_Loot(player, False)
 
     player.experience += mob.experience_give
     if player.experience < player.base_xp:

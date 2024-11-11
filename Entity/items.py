@@ -6,6 +6,20 @@ class Items(GlobalItems.Items):
     def __init__(self, name, damage=0, protection=0, speed=0, heal=0, duration=0):
         super().__init__(name, damage, protection, speed, heal, duration)
 
+    def apply_effects(self, player):
+        if self.heal > 0:
+            player.health = min(player.health + self.heal, player.max_health)
+            print(f"{player.name} a récupéré {self.heal} points de vie. Vie actuelle : {player.health}/{player.max_health}")
+        if self.protection > 0:
+            player.defense += self.protection
+            print(f"{player.name} a augmenté sa défense de {self.protection} pour {self.duration} tours.")
+        if self.speed > 0:
+            player.speed += self.speed
+            print(f"{player.name} a augmenté sa vitesse de {self.speed} pour {self.duration} tours.")
+        if self.damage > 0:
+            player.attack += self.damage
+            print(f"{player.name} a augmenté son attaque de {self.damage} pour {self.duration} tours.")
+
 
 class SmallHealPotion(Items):
     def __init__(self):
@@ -24,7 +38,7 @@ class LargeHealPotion(Items):
 
 class ProtectionRune(Items):
     def __init__(self):
-        super().__init__("Protection Rune", protection=12, duration=5)
+        super().__init__("Protection Rune", protection=9, duration=5)
 
 
 class SpeedCard(Items):
@@ -34,22 +48,22 @@ class SpeedCard(Items):
 
 class PopeiSpinach(Items):
     def __init__(self):
-        super().__init__("Popei Spinach", damage=15, duration=5)
+        super().__init__("Popei Spinach", damage=10, duration=5)
 
 
-table_rarete = {
-    SmallHealPotion(): 20,
-    MediumHealPotion(): 10,
-    LargeHealPotion(): 2,
-    ProtectionRune(): 10,
-    SpeedCard(): 10,
-    PopeiSpinach(): 10
+rarity_table = {
+    SmallHealPotion(): 50,
+    MediumHealPotion(): 30,
+    LargeHealPotion(): 10,
+    ProtectionRune(): 5,
+    SpeedCard(): 0,
+    PopeiSpinach(): 5
 }
 
 
 def random_item_drop():
-    items = list(table_rarete.keys())
-    rarity = list(table_rarete.values())
+    items = list(rarity_table.keys())
+    rarity = list(rarity_table.values())
     selected_item = random.choices(items, weights=rarity, k=1)[0]
     return selected_item
 

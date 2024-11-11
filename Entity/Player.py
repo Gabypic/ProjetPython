@@ -91,3 +91,20 @@ class Player:
                 self.place[0] += 1
             else:
                 print("\033[91mYou can't continue right, because of a mysterious and thick fog\033[0m")
+
+    def add_item(self, item, quantity):
+        if item in self.inventory:
+            self.inventory[item] += quantity
+        else:
+            self.inventory = quantity
+        print(self.inventory)
+
+    def use_item(self, item):
+        if item in self.inventory:
+            self.inventory[item] -= 1
+
+    def show_weapons_inventory(self):
+        print("\033[94mInventory:\033[0m")
+        for item, quantity in self.inventory.items():
+            print(f"{item}: {quantity}")
+
