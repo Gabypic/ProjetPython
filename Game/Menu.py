@@ -9,7 +9,7 @@ from Database.DatabaseHandler import DatabaseHandler
 DB = DatabaseHandler("Save.db")
 def menu():
     MusicControl.music_controller("./Musiques/Ambiant/SkywardSwordMainMenu.mp3", False)
-    print("\033[92mWELCOME ON PYTHON RPG PROJECT !\033[0m\n")
+    print("\033[92mWELCOME ON Forest Escaper !\033[0m\n")
     print("--------------------------------")
     print("\033[94mMain Menu : \033[0m")
     print("1. Create New Game")
@@ -58,3 +58,8 @@ def load_game():
     player = DB.take_save(None)
     Controls.Controls_Menu(player)
 
+
+def about():
+    print("\03392mForest Escaper\033[0m is a level farming game.\n"
+          "The objective is to reach level 21 to encounter the boss on the case 9,9."
+          "By winning the boss fight, you reach the end of the game.")

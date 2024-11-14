@@ -1,5 +1,5 @@
 from Musiques import MusicControl
-from Game import EncounterMonster
+from Game import EncounterMonster, Menu
 from Database.DatabaseHandler import DatabaseHandler
 import clear
 
@@ -37,11 +37,11 @@ def Controls_Selector(selection, player):
     if selection == "i":
         show_inventory(player)
     if selection == "e":
-        print(player.equipped.name)
+        show_equipped_weapon(player)
     if selection == "s":
         stats_printer(player)
     if selection == "r":
-        print("rules")
+        rules_printer()
     if selection == "save":
         save(player)
     if selection == "exit":
@@ -90,7 +90,8 @@ def close_game():
             print("Incorrect Selection")
     if choice == "yes":
         print("\033[93mQuitting Game\033[0m")
-        exit("Game closed")
+        clear.clear_terminal(4)
+        Menu.menu()
 
 
 def show_inventory(player):
@@ -109,3 +110,21 @@ def save(player):
     except Exception as e:
         print(f"\033[91mSave Failed; {e}\033[0m")
         return
+
+
+def rules_printer():
+    clear.clear_terminal(1)
+    print("Your objective is to reach level 21 et go to the 9,9 case to fight the boss\n"
+          "On each movement, you have a chance to encounter a monster.\n"
+          "By winning a fight, you will gain experience and have a chance to drop the mob weapon.\n"
+          "After a win, you have a chance to found a chest on the case. "
+          "There is a chance that there is nothing in the chest.\n"
+          "To some levels, the monsters you will encounter will change and being stronger.\n"
+          "The Mimic is a specific monster who will act like a chest by killing her.\n"
+          "You still have a chance to cross a chest after killing a Mimic.\n"
+          "Finally, the Boss is the strongest monster, his name is Nergigante the Forest Warden.\n"
+          "\033[91mKill him to finish the game.\033\n[0m"
+          "\033[94mGOOD LUCK\033[0m")
+    input("\n\n\033[93mPress enter to continue\033[0m")
+    return
+
