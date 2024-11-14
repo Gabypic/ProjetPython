@@ -35,10 +35,10 @@ def difficulty_selector():
         return difficulty, 100
     elif difficulty == "2":
         print("\033[92mYou choose medium difficulty.\033[0m")
-        return difficulty, 150
+        return difficulty, 130
     elif difficulty == "3":
         print("\033[91mYou choose hard difficulty.\033[0m")
-        return difficulty, 200
+        return difficulty, 150
     elif difficulty == "":
         print("\033[91mPlease choose a difficulty level.\033[0m")
         return difficulty_selector()

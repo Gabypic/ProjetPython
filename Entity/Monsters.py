@@ -6,38 +6,38 @@ class Monsters(GlobalEntity.Entity):
     def __init__(self, name):
 
         if name == "Baby Goblin":
-            super().__init__(name, 1, 200, 30, 5,
-                             5, 12, [Weapons.Dagger()], None, Weapons.Dagger())
+            super().__init__(name, 1, 200, 30, 10,
+                             9, 12, [Weapons.Dagger()], None, Weapons.Dagger())
         if name == "Slime":
-            super().__init__(name, 2, 200, 45, 8,
+            super().__init__(name, 2, 200, 45, 12,
                              16, 14, [], None, None)
         if name == "Goblin":
             super().__init__(name, 5, 600, 60, 23,
                              25, 15, [Weapons.Sword()], None, Weapons.Sword())
         if name == "Giant Goblin":
-            super().__init__(name, 15, 900, 90, 27,
-                         32, 20, [Weapons.Axe()], None, Weapons.Axe())
+            super().__init__(name, 15, 900, 90, 32,
+                         35, 20, [Weapons.Axe()], None, Weapons.Axe())
         if name == "Little Skeleton":
-            super().__init__(name, 2, 300, 50, 10,
+            super().__init__(name, 2, 300, 50, 14,
                              18, 14, [Weapons.Rapier()], None, Weapons.Rapier())
         if name == "Skeleton":
-            super().__init__(name, 6, 650, 65, 12,
-                             22, 20, [Weapons.Sword()], None, Weapons.Sword())
+            super().__init__(name, 6, 650, 65, 24,
+                             26, 20, [Weapons.Sword()], None, Weapons.Sword())
         if name == "Giant Skeleton":
-            super().__init__(name, 15, 1000, 100, 30,
-                             35, 20, [Weapons.LongSword()], None, Weapons.LongSword())
+            super().__init__(name, 15, 1000, 100, 42,
+                             38, 20, [Weapons.LongSword()], None, Weapons.LongSword())
         if name == "Wolf":
-            super().__init__(name, 17, 1100, 90, 35,
-                             42, 30, [], None, None)
+            super().__init__(name, 17, 1100, 90, 42,
+                             48, 30, [], None, None)
         if name == "Punching Ball":
             super().__init__(name, 1, 0, 9999, 0,
                              0, 0, [], None, None)
         if name == "Mimic":
             super().__init__(name, 10, 550, 75, 24,
-                             30, 14, [], None, None)
+                             28, 14, [], None, None)
         if name == "Nergigante":
-            super().__init__(name, 25, 5000, 250, 42,
-                             50, 100, [],  [9, 9], None)
+            super().__init__(name, 25, 5000, 350, 55,
+                             60, 100, [],  [9, 9], None)
 
     def take_damage(self, damage):
         self.health -= damage

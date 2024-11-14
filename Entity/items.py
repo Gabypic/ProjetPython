@@ -9,16 +9,32 @@ class Items(GlobalItems.Items):
     def apply_effects(self, player):
         if self.heal > 0:
             player.health = min(player.health + self.heal, player.max_health)
-            print(f"{player.name} a récupéré {self.heal} points de vie. Vie actuelle : {player.health}/{player.max_health}")
+            print(
+                f"{player.name} has recovered {self.heal} health points. Current health: {player.health}/{player.max_health}")
+
         if self.protection > 0:
-            player.defense += self.protection
-            print(f"{player.name} a augmenté sa défense de {self.protection} pour {self.duration} tours.")
+            player.active_effects.append({
+                'apply': lambda p: p.defense + self.protection,
+                'remove': lambda p: p.defense - self.protection,
+                'turns': self.duration
+            })
+            print(f"{player.name} increased their defense by {self.protection} for {self.duration} turns.")
+
         if self.speed > 0:
-            player.speed += self.speed
-            print(f"{player.name} a augmenté sa vitesse de {self.speed} pour {self.duration} tours.")
+            player.active_effects.append({
+                'apply': lambda p: p.speed + self.speed,
+                'remove': lambda p: p.speed - self.speed,
+                'turns': self.duration
+            })
+            print(f"{player.name} increased their speed by {self.speed} for {self.duration} turns.")
+
         if self.damage > 0:
-            player.attack += self.damage
-            print(f"{player.name} a augmenté son attaque de {self.damage} pour {self.duration} tours.")
+            player.active_effects.append({
+                'apply': lambda p: p.attack + self.damage,
+                'remove': lambda p: p.attack - self.damage,
+                'turns': self.duration
+            })
+            print(f"{player.name} increased their attack by {self.damage} for {self.duration} turns.")
 
 
 class SmallHealPotion(Items):

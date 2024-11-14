@@ -1,5 +1,5 @@
 from random import *
-from Entity import Weapons, Monsters
+from Entity import Weapons, Monsters, items
 
 
 class Player:
@@ -22,6 +22,7 @@ class Player:
             self.max_health = health
         else:
             self.max_health = max_health
+        self.active_effects = []
 
     def __str__(self):
         return self.name
@@ -38,9 +39,9 @@ class Player:
         self.level += 1
         self.experience = 0
         self.base_xp = self.base_xp * 1.3
-        self.max_health += randint(3, 7)
+        self.max_health += randint(2, 4)
         self.health = self.max_health
-        self.defense += randint(0, 4)
+        self.defense += randint(0, 3)
         self.attack += randint(0, 3)
 
     def take_damage(self, damage):
@@ -97,6 +98,10 @@ class Player:
                 print("\033[91mYou can't continue right, because of a mysterious and thick fog\033[0m")
 
     def add_item(self, item, quantity):
+        if isinstance(item, Weapons.Weapons) and (self.equipped and self.equipped.name == item.name or item in self.inventory):
+            print(f"You already have a {item.name}.")
+            return
+
         if item in self.inventory:
             self.inventory[item] += quantity
         else:
@@ -108,6 +113,48 @@ class Player:
 
     def show_inventory(self):
         print("\033[94mInventory:\033[0m")
-        for item, quantity in self.inventory.items():
-            print(f"{item.name}: {quantity}")
+        inventory_items = list(self.inventory.keys())
 
+        for index, item in enumerate(inventory_items):
+            print(f"{index + 1}. {item.name} x{self.inventory[item]}")
+
+        choice = input("\nSelect an item to use or equip (number), or press 'q' to exit:\n").lower()
+        if choice == 'q':
+            return
+
+        try:
+            item_index = int(choice) - 1
+            selected_item = inventory_items[item_index]
+
+            if isinstance(selected_item, Weapons.Weapons):
+                self.equip_weapon(selected_item)
+            elif isinstance(selected_item, items.Items):
+                selected_item.apply_effects(self)
+                self.use_item(selected_item)
+
+        except (IndexError, ValueError):
+            print("\033[91mInvalid selection\033[0m")
+
+    def equip_weapon(self, new_weapon):
+        if self.equipped:
+            if self.equipped in self.inventory:
+                self.inventory[self.equipped] += 1
+            else:
+                self.inventory[self.equipped] = 1
+
+        self.equipped = new_weapon
+        print(f"\033[92mEquipped {new_weapon.name}\033[0m")
+
+        if self.inventory[new_weapon] > 1:
+            self.inventory[new_weapon] -= 1
+        else:
+            del self.inventory[new_weapon]
+
+    def apply_active_effects(self):
+        for effect in self.active_effects[:]:
+            if effect['turns'] > 0:
+                effect['apply'](self)
+                effect['turns'] -= 1
+            else:
+                self.active_effects.remove(effect)
+                effect['remove'](self)

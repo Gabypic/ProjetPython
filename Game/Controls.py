@@ -54,6 +54,12 @@ def Controls_Selector(selection, player):
     return reload
 
 
+def show_equipped_weapon(player):
+    print(f"{player.equipped.name} --> damage : {player.equipped.damage}")
+    input("\n\033[93mPress enter to continue\033[0m")
+    return
+
+
 def stats_printer(player):
     print("\033[94mYour informations :\033[0m\n"
           f"name : {player.name}\n"
