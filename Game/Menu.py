@@ -2,10 +2,11 @@ import os
 import sys
 import time
 import clear
-from Game import CreateGame as cg
+from Game import CreateGame as cg, Controls
 from Musiques import MusicControl
+from Database.DatabaseHandler import DatabaseHandler
 
-
+DB = DatabaseHandler("Save.db")
 def menu():
     MusicControl.music_controller("./Musiques/Ambiant/SkywardSwordMainMenu.mp3", False)
     print("\033[92mWELCOME ON PYTHON RPG PROJECT !\033[0m\n")
@@ -29,6 +30,7 @@ def menu_selector(choice):
     elif choice == "2":
         print("\033[92mLoading Game... \033[0m")
         clear.clear_terminal(1)
+        load_game()
         MusicControl.music_controller("./Musique/Ambiant/SkywardSwordMainMenu.mp3", True)
 
     elif choice == "3":
@@ -50,3 +52,9 @@ def menu_selector(choice):
               "Reloading Menu...\033[0m")
         clear.clear_terminal(1)
         menu()
+
+
+def load_game():
+    player = DB.take_save(None)
+    Controls.Controls_Menu(player)
+

@@ -2,20 +2,19 @@ from Entity import Weapons, items, Monsters, Player
 import random
 
 
-def Mob_Loot(player: Player.Player, mob: Monsters.Monsters):
+def Mob_Loot(player, mob):
     loot_chance = random.randint(1, 100)
-    if loot_chance > 90 and mob.name != "Mimic" and mob.inventory:
-        if mob.inventory[0] in player.inventory:
+    if loot_chance > 80 and mob.name != "Mimic" and mob.inventory:
+        item = mob.inventory[0]
+        if item in player.inventory:
             print("\033[93mYou already have this weapon, so you leave it on the ground\033[0m")
         else:
-            player.inventory.append(mob.inventory[0])
-
+            player.inventory[item] = 1
     elif loot_chance > 15 and mob.name == "Mimic":
         print("By killing a Mimic, you obtain the item she was storing")
         Chest_Loot(player, True)
-
     else:
-        print("\033[93mDuring the fight, the Monster weapons was damaged, so you cannot take it\033[0m")
+        print("\033[93mDuring the fight, the Monster weapon was damaged, so you cannot take it\033[0m")
 
 
 def Chest_Loot(player: Player.Player, mimic):

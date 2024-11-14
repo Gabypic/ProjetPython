@@ -1,8 +1,9 @@
 from random import *
 from Entity import Weapons, Monsters
 
+
 class Player:
-    def __init__(self, name, score, difficulty, level, base_xp, experience, health, defense, attack,
+    def __init__(self, name, score, difficulty, level, base_xp, experience, health, max_health, defense, attack,
                  speed, inventory, place, equipped):
         self.name = name
         self.score = score
@@ -11,13 +12,16 @@ class Player:
         self.base_xp = base_xp
         self.experience = experience
         self.health = health
-        self.max_health = health
         self.defense = defense
         self.attack = attack
         self.speed = speed
         self.inventory = inventory
         self.place = place
         self.equipped = equipped
+        if max_health == 0:
+            self.max_health = health
+        else:
+            self.max_health = max_health
 
     def __str__(self):
         return self.name
@@ -96,15 +100,14 @@ class Player:
         if item in self.inventory:
             self.inventory[item] += quantity
         else:
-            self.inventory = quantity
-        print(self.inventory)
+            self.inventory[item] = quantity
 
     def use_item(self, item):
         if item in self.inventory:
             self.inventory[item] -= 1
 
-    def show_weapons_inventory(self):
+    def show_inventory(self):
         print("\033[94mInventory:\033[0m")
         for item, quantity in self.inventory.items():
-            print(f"{item}: {quantity}")
+            print(f"{item.name}: {quantity}")
 

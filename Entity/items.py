@@ -55,9 +55,9 @@ rarity_table = {
     SmallHealPotion(): 50,
     MediumHealPotion(): 30,
     LargeHealPotion(): 10,
-    ProtectionRune(): 5,
+    ProtectionRune(): 10,
     SpeedCard(): 0,
-    PopeiSpinach(): 5
+    PopeiSpinach(): 10
 }
 
 
